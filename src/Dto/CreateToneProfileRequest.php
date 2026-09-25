@@ -13,7 +13,7 @@ class CreateToneProfileRequest
     #[Assert\NotNull]
     public ?Genre $genre = null;
 
-   #[Assert\NotNull]
+    #[Assert\NotNull]
     #[Assert\Range(min: 0, max: 10)]
     public ?int $gain = null;
 
