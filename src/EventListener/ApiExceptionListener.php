@@ -2,6 +2,8 @@
 
 namespace App\EventListener;
 
+use App\Exception\GuitarNotFoundException;
+use App\Exception\ToneProfileNotFoundException;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -20,9 +22,20 @@ class ApiExceptionListener
         }
 
         $exception = $event->getThrowable();
-        $statusCode = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500;
 
-        $payload = ['error' => $exception instanceof HttpExceptionInterface ? $exception->getMessage() : 'Internal server error'];
+        $isNotFoundDomainException = $exception instanceof GuitarNotFoundException
+            || $exception instanceof ToneProfileNotFoundException;
+
+        $statusCode = match (true) {
+            $exception instanceof HttpExceptionInterface => $exception->getStatusCode(),
+            $isNotFoundDomainException => 404,
+            default => 500,
+        };
+
+        $payload = match (true) {
+            $exception instanceof HttpExceptionInterface, $isNotFoundDomainException => ['error' => $exception->getMessage()],
+            default => ['error' => 'Internal server error'],
+        };
 
         $previous = $exception->getPrevious();
         
