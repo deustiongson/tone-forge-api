@@ -8,17 +8,27 @@ use PHPUnit\Framework\TestCase;
 
 class GuitarTest extends TestCase
 {
-    public function testGettersAndSettersRoundTrip(): void
+    public function testNameSetter(): void
     {
         $guitar = new Guitar();
-
-        $guitar->setName('Test Strat')
-            ->setPickupType(PickupType::SingleCoil)
-            ->setTuning('E Standard');
-
+        $guitar->setName('Test Strat');
+            
         $this->assertSame('Test Strat', $guitar->getName());
-        $this->assertSame(PickupType::SingleCoil, $guitar->getPickupType());
-        $this->assertSame('E Standard', $guitar->getTuning());
+    }
+
+    public function testPickupTypeSetter(): void
+    {
+        $guitar = new Guitar();
+        $guitar->setPickupType(PickupType::SingleCoil);
         
+        $this->assertSame(PickupType::SingleCoil, $guitar->getPickupType());
+    }
+
+    public function testTuningSetter(): void
+    {
+        $guitar = new Guitar();
+        $guitar->setTuning('E Standard');
+        
+        $this->assertSame('E Standard', $guitar->getTuning());
     }
 }
