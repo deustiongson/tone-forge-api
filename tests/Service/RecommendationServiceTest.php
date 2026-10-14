@@ -41,12 +41,9 @@ class RecommendationServiceTest extends TestCase
 
     public function testRecommendThrowsExceptionWhenToneProfileNotFound(): void
     {   
-        $testGuitar = new Guitar();
-
-        $testGuitar->setName("Test Electric Guitar")
-            ->setPickupType(PickupType::Humbucker)
-            ->setTuning("Drop D");
-
+        
+        $testGuitar = $this->buildGuitar(PickupType::Humbucker, 'Drop D');
+        
         //create fake Guitar Repository
         $guitarRepository = $this->createStub(GuitarRepository::class);
         //Configure find() method to always return our testGuitar object
@@ -70,89 +67,34 @@ class RecommendationServiceTest extends TestCase
     }
 
     public function testRecommendReturnsHighestScoringEquipmentPerType(): void
-    {
-        $guitar = new Guitar();
-        $guitar->setName('Test Electric Guitar')
-            ->setPickupType(PickupType::Humbucker)
-            ->setTuning('E Flat Standard');
-            
-        $toneProfile = new ToneProfile();
-        $toneProfile->setName('Test Rock Tone Profile')
-            ->setGenre(Genre::Rock)
-            ->setGain(5)    
-            ->setBrightness(5);
+    {   
+        $guitar = $this->buildGuitar(PickupType::Humbucker, 'E Flat Standard');
+        
+        $toneProfile = $this->buildToneProfile(Genre::Rock, 5, 5);
 
         //Exact match with Genre, Gain, Brightness
-        $bestAmp = new Equipment();
-        $bestAmp->setName('Best Amp')
-            ->setType(EquipmentType::Amplifier)
-            ->setGenre(Genre::Rock)
-            ->setGainRating(5)
-            ->setBrightnessRating(5)
-            ->setPreferredPickupType(null);
+        $bestAmp = $this->buildEquipment('Best Amp', EquipmentType::Amplifier, Genre::Rock, 5, 5, null);
 
         //Genre is Jazz against Rock Tone Profile
-        $worseAmp = new Equipment();
-        $worseAmp->setName('Worse Amp')
-            ->setType(EquipmentType::Amplifier)
-            ->setGenre(Genre::Jazz)
-            ->setGainRating(5)
-            ->setBrightnessRating(5)
-            ->setPreferredPickupType(null);
-
+        $worseAmp = $this->buildEquipment('Worse Amp', EquipmentType::Amplifier, Genre::Jazz, 5, 5, null);
+        
         //Same attribute values with Tone Profile
-        $bestCabinet = new Equipment();
-        $bestCabinet->setName('Best Cabinet')
-            ->setType(EquipmentType::Cabinet)
-            ->setGenre(Genre::Rock)
-            ->setGainRating(5)
-            ->setBrightnessRating(5)
-            ->setPreferredPickupType(null);
+        $bestCabinet = $this->buildEquipment('Best Cabinet', EquipmentType::Cabinet, Genre::Rock, 5, 5, null);
         
         //Lower gain and brightness
-        $worseCabinet = new Equipment();
-        $worseCabinet->setName('Worse Cabinet')
-            ->setType(EquipmentType::Cabinet)
-            ->setGenre(Genre::Rock)
-            ->setGainRating(3)
-            ->setBrightnessRating(3)
-            ->setPreferredPickupType(null);
+        $worseCabinet = $this->buildEquipment('Worse Cabinet', EquipmentType::Cabinet, Genre::Rock, 3, 3, null);
         
         //matches the Rock Tone Profile
-        $bestEffect = new Equipment();
-        $bestEffect->setName('Best Effect')
-            ->setType(EquipmentType::Effect)
-            ->setGenre(Genre::Rock)
-            ->setGainRating(5)
-            ->setBrightnessRating(5)
-            ->setPreferredPickupType(null);
+        $bestEffect = $this->buildEquipment('Best Effect', EquipmentType::Effect, Genre::Rock, 5, 5, null);
         
         //Slightly lower Gain and Brightness
-        $tiedEffect1 = new Equipment();
-        $tiedEffect1->setName('Tied Effect 1')
-            ->setType(EquipmentType::Effect)
-            ->setGenre(Genre::Rock)
-            ->setGainRating(4)
-            ->setBrightnessRating(4)
-            ->setPreferredPickupType(null);
+        $tiedEffect1 = $this->buildEquipment('Tied Effect 1', EquipmentType::Effect, Genre::Rock, 4, 4, null);
 
         //Same values with $tiedEffect1
-        $tiedEffect2 = new Equipment();
-        $tiedEffect2->setName('Tied Effect 2')
-            ->setType(EquipmentType::Effect)
-            ->setGenre(Genre::Rock)
-            ->setGainRating(4)
-            ->setBrightnessRating(4)
-            ->setPreferredPickupType(null);
+        $tiedEffect2 = $this->buildEquipment('Tied Effect 2', EquipmentType::Effect, Genre::Rock, 4, 4, null);
 
         //Genre is Jazz and Gain and Brightness are lower than Rock Tone Profile
-        $worstEffect = new Equipment();
-        $worstEffect->setName('Worst Effect')
-            ->setType(EquipmentType::Effect)
-            ->setGenre(Genre::Jazz)
-            ->setGainRating(4)
-            ->setBrightnessRating(4)
-            ->setPreferredPickupType(null);
+        $worstEffect = $this->buildEquipment('Worst Effect', EquipmentType::Effect, Genre::Jazz, 4, 4, null);
         
         $allEquipment = [$bestAmp, $worseAmp, $bestCabinet, $worseCabinet, $bestEffect, $tiedEffect1, $tiedEffect2, $worstEffect];
         
@@ -177,5 +119,139 @@ class RecommendationServiceTest extends TestCase
 
         //The list of effects in the result should be $bestEffect, $tiedEffect1, $tiedEfect2 
         $this->assertSame([$bestEffect, $tiedEffect1, $tiedEffect2], $result->effects);
+    }
+
+    public function testRecommendReturnsEmptyEquipmentWithEmptyCatalog()
+    {
+        $guitar = $this->buildGuitar(PickupType::P90, 'E Standard');
+            
+        $toneProfile = $this->buildToneProfile(Genre::Jazz, 3, 4);
+
+        $guitarRepository = $this->createStub(GuitarRepository::class);
+        $guitarRepository->method('find')->willReturn($guitar);
+
+        $toneProfileRepository = $this->createStub(ToneProfileRepository::class);
+        $toneProfileRepository->method('find')->willReturn($toneProfile);
+
+        //findAll will return empty array (empty equipment catalog)
+        $equipmentRepository = $this->createStub(EquipmentRepository::class);
+        $equipmentRepository->method('findAll')->willReturn([]);
+
+        $service = new RecommendationService($guitarRepository, $toneProfileRepository, $equipmentRepository);
+
+        $result = $service->recommend(1, 1);
+
+        //no amplifier and cabinet, empty effects list
+        $this->assertNull($result->amplifier);
+        $this->assertNull($result->cabinet);
+        $this->assertSame([], $result->effects);
+    }
+
+    public function testRecommendReturnsFewerEquipmentWithSmallCatalog()
+    {   
+        $guitar = $this->buildGuitar(PickupType::Humbucker, 'D Standard');
+        
+        $toneProfile = $this->buildToneProfile(Genre::Blues, 4, 5);
+        
+        $effect = $this->buildEquipment('Test Effect', EquipmentType::Effect, Genre::Blues, 5, 5, null);
+        
+        $guitarRepository = $this->createStub(GuitarRepository::class);
+        $guitarRepository->method('find')->willReturn($guitar);
+
+        $toneProfileRepository = $this->createStub(ToneProfileRepository::class);
+        $toneProfileRepository->method('find')->willReturn($toneProfile);
+
+        //findAll will return one effect
+        $equipmentRepository = $this->createStub(EquipmentRepository::class);
+        $equipmentRepository->method('findAll')->willReturn([$effect]);
+
+        $service = new RecommendationService($guitarRepository, $toneProfileRepository, $equipmentRepository);
+
+        $result = $service->recommend(1, 1);
+        $this->assertSame([$effect], $result->effects);
+    }
+
+    //Mocks (behavior/interaction verification)
+    public function testRecommendCallsFindWithGuitarIdAndToneProfileId(): void
+    {
+        $guitar = $this->buildGuitar();
+        $toneProfile = $this->buildToneProfile();
+
+        $guitarRepository = $this->createMock(GuitarRepository::class);
+        $guitarRepository->expects($this->once())
+            ->method('find')
+            ->with(15)
+            ->willReturn($guitar);
+
+        $toneProfileRepository = $this->createMock(ToneProfileRepository::class);
+        $toneProfileRepository->expects($this->once())
+            ->method('find')
+            ->with(58)
+            ->willReturn($toneProfile);
+
+        $equipmentRepository = $this->createStub(EquipmentRepository::class);
+        $equipmentRepository->method('findAll')->willReturn([]);
+
+        $service = new RecommendationService($guitarRepository, $toneProfileRepository, $equipmentRepository);
+        $service->recommend(15, 58);
+    }
+
+    public function testRecommendReturnsMorePickupCompatibleWithIdenticalEquipment()
+    {
+        $guitar = $this->buildGuitar(PickupType::Humbucker, 'E Standard');
+
+        $toneProfile = $this->buildToneProfile(Genre::Jazz, 5, 5);
+
+        $matchingPickupAmp = $this->buildEquipment('Matching Pickup Amp', EquipmentType::Amplifier, Genre::Jazz, 5, 5, PickupType::Humbucker);
+        $nonMatchingPickupAmp = $this->buildEquipment('Non-Matching Pickup Amp', EquipmentType::Amplifier, Genre::Jazz, 5, 5, null);
+
+        $guitarRepository = $this->createStub(GuitarRepository::class);
+        $guitarRepository->method('find')->willReturn($guitar);
+
+        $toneProfileRepository = $this->createStub(ToneProfileRepository::class);
+        $toneProfileRepository->method('find')->willReturn($toneProfile);
+
+        $equipmentRepository = $this->createStub(EquipmentRepository::class);
+        $equipmentRepository->method('findAll')->willReturn([$nonMatchingPickupAmp, $matchingPickupAmp]);
+
+        $service = new RecommendationService($guitarRepository, $toneProfileRepository, $equipmentRepository);
+
+        $result = $service->recommend(1, 1);
+
+        $this->assertSame($matchingPickupAmp, $result->amplifier);
+    }
+
+    private function buildGuitar(PickupType $pickupType = PickupType::Humbucker, string $tuning = 'E Standard'): Guitar 
+    {   
+        $guitar = new Guitar();
+        $guitar->setName("Test Electric Guitar")
+            ->setPickupType($pickupType)
+            ->setTuning($tuning);
+
+        return $guitar;
+    }
+
+    private function buildToneProfile(Genre $genre = Genre::Jazz, int $gain = 5, int $brightness = 5): ToneProfile
+    {
+        $toneProfile = new ToneProfile();
+        $toneProfile->setName('Test Jazz Tone Profile')
+            ->setGenre($genre)
+            ->setGain($gain)    
+            ->setBrightness($brightness);
+
+        return $toneProfile;
+    }
+
+    private function buildEquipment(string $name, EquipmentType $equipmentType, Genre $genre, int $gain, int $brightness, ?PickupType $preferredPickupType = null): Equipment
+    {
+        $equipment = new Equipment();
+        $equipment->setName($name)
+            ->setType($equipmentType)
+            ->setGenre($genre)
+            ->setGainRating($gain)
+            ->setBrightnessRating($brightness)
+            ->setPreferredPickupType($preferredPickupType);
+
+        return $equipment;
     }
 }
