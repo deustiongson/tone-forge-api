@@ -161,14 +161,23 @@ See `docs/architecture.md` for the complete, ongoing log, including corrections 
 
 ## Testing Strategy
 
-**Unit tests** (`tests/Service/RecommendationServiceTest.php`) cover `RecommendationService` — the only substantial business logic in this app — using PHPUnit test doubles instead of a real database:
+**Unit tests** (42 tests, `tests/`) — no real database, no HTTP, entirely isolated:
 
-- **State-based tests** (the majority): given fixed inputs, assert the method returns/throws the right thing. Uses `createStub()` for fake repositories that just hand back canned data.
-- **One interaction-based test**: verifies `RecommendationService` calls `find()` on the correct repository with the *exact* ID it was given, using a real `createMock()` with `->expects()`/`->with()`. This catches a class of bug state-based tests can't — e.g. accidentally swapping `$guitarId` and `$toneProfileId` in a lookup call, which a stub (which returns the same canned value regardless of argument) wouldn't notice.
+- **Entities** (`GuitarTest`, `ToneProfileTest`, `EquipmentTest`) — one test per property's setter/getter round-trip. Split deliberately rather than combined into one test per entity: PHPUnit stops a test method at its first failed assertion, so separate methods ensure a single run surfaces *every* broken property, not just the first one reached.
+- **DTO validation** (`CreateGuitarRequestTest`, `CreateToneProfileRequestTest`, `CreateRecommendationRequestTest`) — using a standalone `Symfony\Component\Validator\Validation::createValidatorBuilder()->enableAttributeMapping()->getValidator()`, with zero kernel/HTTP involved. Tests every constraint's boundary (valid payload, each failure mode) — this is what would have caught the `NotBlank`-vs-`NotNull` bug on `gain`/`brightness` (`NotBlank` incorrectly treats `0` as blank) as an automated regression, instead of only catching it once by hand via curl.
+- **`RecommendationService`** (`RecommendationServiceTest`) — the core business logic: not-found domain exceptions, the full scoring/tie-breaking algorithm (including deliberate score ties), empty/small catalogs, and isolated pickup-compatibility.
+  - **State-based tests** (the majority): given fixed inputs, assert the method returns/throws the right thing, using `createStub()` for fake repositories that just hand back canned data regardless of arguments.
+  - **One interaction-based test**: verifies `RecommendationService` calls `find()` on the correct repository with the *exact* ID it was given, using a real `createMock()` with `->expects()`/`->with()`. This catches a class of bug state-based tests structurally can't — e.g. accidentally swapping `$guitarId` and `$toneProfileId` in a lookup call, which a stub (which returns the same canned value regardless of argument) wouldn't notice.
 
 The default is state-based/classicist testing; interaction verification is reserved for cases where *how* a dependency is called is itself part of what "correct" means, not used as a blanket habit. See Martin Fowler's [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html) for the canonical treatment of this distinction.
 
-**Not yet built**: API/integration tests (`WebTestCase`, testing full HTTP request/response cycles against real routes).
+**Integration tests** (`tests/Controller/`, 15 tests) — hit the real app through `WebTestCase`'s in-process HTTP client, against a dedicated `app_test` database:
+
+- **`EquipmentControllerTest`** — list/show against the real seeded catalog, 404 for a missing ID.
+- **`GuitarControllerTest`** / **`ToneProfileControllerTest`** — full `POST` → persist → `GET`-it-back round trips through real MySQL, a validation-failure case, and 404s. This is the one thing no unit test can prove: that Doctrine's actual mapping, the migration's actual schema, and a real database round-trip all agree.
+- **`RecommendationControllerTest`** — the full HTTP → service → DB → HTTP chain, including both not-found domain-exception paths actually resolving to real `404` responses (not just unit-tested or manually curled) and a validation failure. Deliberately checks response *shape* rather than re-deriving exact scoring winners by hand — that correctness is already locked in by the unit tests; this layer's job is proving the pipeline connects, not re-verifying business logic.
+
+Getting this working surfaced a genuinely tricky, multi-layered bug — two different Symfony mechanisms (a full kernel reboot, and a separate service-reset tag) both reset the database connection between requests made within a single test by default, silently breaking the "create then read it back" pattern. Full root-cause writeup, including the exact vendor source consulted to diagnose it, is in [`docs/architecture.md`](docs/architecture.md). Isolation itself uses a hand-written transaction-per-test base class (`ApiTestCase`) rather than `dama/doctrine-test-bundle` — also written up there, including why, with the bundle's own README quoted to confirm the mechanism is equivalent.
 
 ## Local Setup
 
@@ -188,6 +197,16 @@ Run tests:
 ```bash
 docker compose exec php php bin/phpunit
 ```
+
+Integration tests need a dedicated `app_test` database (separate from the dev `app` database used above) — one-time setup:
+
+```bash
+docker compose exec mysql mysql -uroot -p'!ChangeMe!' -e "CREATE DATABASE IF NOT EXISTS app_test; GRANT ALL PRIVILEGES ON app_test.* TO 'app'@'%'; FLUSH PRIVILEGES;"
+docker compose exec -e 'DATABASE_URL=mysql://app:!ChangeMe!@mysql:3306/app_test?serverVersion=8.0.32&charset=utf8mb4' php php bin/console doctrine:migrations:migrate --no-interaction
+docker compose exec -e 'DATABASE_URL=mysql://app:!ChangeMe!@mysql:3306/app_test?serverVersion=8.0.32&charset=utf8mb4' php php bin/console doctrine:fixtures:load --no-interaction
+```
+
+After that one-time setup, `docker compose exec php php bin/phpunit` picks up `app_test` automatically — no need to override `DATABASE_URL` for actually running the suite. Doctrine's `when@test` config (`config/packages/doctrine.yaml`) appends the `_test` suffix to the base `app` database name automatically whenever `APP_ENV=test`, which `phpunit.dist.xml` always forces — overriding `DATABASE_URL` yourself for test runs would double the suffix (`app_test_test`).
 
 ## Docker
 
