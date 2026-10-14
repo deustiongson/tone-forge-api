@@ -11,24 +11,27 @@ class GuitarTest extends TestCase
     public function testNameSetter(): void
     {
         $guitar = new Guitar();
-        $guitar->setName('Test Strat');
+        $name = 'Test Strat';
+        $guitar->setName($name);
             
-        $this->assertSame('Test Strat', $guitar->getName());
+        $this->assertSame($name, $guitar->getName());
     }
 
     public function testPickupTypeSetter(): void
     {
         $guitar = new Guitar();
-        $guitar->setPickupType(PickupType::SingleCoil);
+        $pickupType = PickupType::SingleCoil;
+        $guitar->setPickupType($pickupType);
         
-        $this->assertSame(PickupType::SingleCoil, $guitar->getPickupType());
+        $this->assertSame($pickupType, $guitar->getPickupType());
     }
 
     public function testTuningSetter(): void
     {
         $guitar = new Guitar();
-        $guitar->setTuning('E Standard');
+        $tuning = 'E Standard';
+        $guitar->setTuning($tuning);
         
-        $this->assertSame('E Standard', $guitar->getTuning());
+        $this->assertSame($tuning, $guitar->getTuning());
     }
 }
