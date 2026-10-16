@@ -4,6 +4,14 @@
 
 A small PHP/Symfony backend that recommends guitar amps, cabinets, and effects based on a guitarist's gear and the tone they're going for.
 
+## What Does This API Actually Do? (For Non-Musicians)
+
+You don't need any guitar knowledge to understand the core feature — it's a **matchmaking/recommendation problem**, the same shape as "pair a wine with this meal" or an outfit app's "complete the look."
+
+A guitar on its own doesn't make much sound — it needs an **amplifier** (shapes and powers the sound), a **cabinet** (the actual speaker box the sound comes out of), and usually some **effects pedals** (add character — distortion, echo, etc.). Different combinations of this gear naturally lean toward different styles: some sound warm and clean, some sound loud and aggressive, and so on.
+
+The API takes two inputs — **what guitar you have** (`Guitar`) and **what kind of sound you're going for** (`ToneProfile` — a genre like "blues" or "metal," plus how much distortion/brightness you want, each on a 0–10 scale) — and recommends the best-matching amplifier, cabinet, and effects from a fixed equipment catalog. It does this with a plain, deterministic scoring formula (not AI/machine learning) that compares each piece of gear's characteristics against what you asked for, and returns whichever scores highest — conceptually no different from a recommendation engine matching products to a stated preference.
+
 ## Why This Project Exists
 
 ToneForge is a backend engineering portfolio project — the primary goal is **learning and demonstrating backend architecture**, not building a feature-complete product. It's deliberately scoped small, and the guitar domain exists mainly because it's a personally interesting space that makes backend concepts easier to reason about and discuss in an interview setting.
@@ -53,6 +61,10 @@ See [`docs/architecture.md`](docs/architecture.md) for the full, continuously-up
 There are deliberately **no foreign-key relationships** between these tables — the relationship between a `Guitar`, a `ToneProfile`, and a set of `Equipment` only exists transiently, computed at request time by `RecommendationService`. Not every conceptual relationship needs to be a database relationship.
 
 `PickupType`, `Genre`, and `EquipmentType` are PHP 8.1+ backed enums rather than plain strings — enforced at the type level rather than relying solely on runtime validation, since mismatches in these values would otherwise silently corrupt the recommendation scoring.
+
+## Use Cases
+
+![ToneForge API use case diagram — an API Client actor connected to nine use cases grouped under Guitars, Tone Profiles, Equipment, and the central Get Recommendation feature](docs/diagrams/use-case-diagram.svg)
 
 ## API Endpoints
 
