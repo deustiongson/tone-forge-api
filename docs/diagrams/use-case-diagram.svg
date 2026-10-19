@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 760" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .uc { fill: #a5d8ff; stroke: #1971c2; stroke-width: 2; }
+    .uc-highlight { fill: #b2f2bb; stroke: #2f9e44; stroke-width: 2.5; }
+    .uc-text { font-size: 14px; fill: #1e1e1e; text-anchor: middle; dominant-baseline: middle; }
+    .uc-text-bold { font-size: 14px; font-weight: 700; fill: #1e1e1e; text-anchor: middle; dominant-baseline: middle; }
+    .link { stroke: #868e96; stroke-width: 1.5; fill: none; }
+    .group-label { font-size: 13px; fill: #495057; font-style: italic; }
+    .title { font-size: 22px; font-weight: 700; fill: #1e1e1e; text-anchor: middle; }
+    .actor-label { font-size: 15px; fill: #1e1e1e; text-anchor: middle; font-weight: 600; }
+  </style>
+
+  <!-- Title -->
+  <text x="610" y="28" class="title">ToneForge API — Use Cases</text>
+
+  <!-- System boundary -->
+  <rect x="300" y="50" width="700" height="690" rx="8" fill="none" stroke="#495057" stroke-width="2"/>
+  <text x="650" y="78" class="title" font-size="18">ToneForge API</text>
+
+  <!-- Actor -->
+  <g stroke="#1e1e1e" stroke-width="2" fill="none">
+    <circle cx="110" cy="360" r="20" fill="#ffd8a8"/>
+    <line x1="110" y1="380" x2="110" y2="440"/>
+    <line x1="80" y1="400" x2="140" y2="400"/>
+    <line x1="110" y1="440" x2="85" y2="485"/>
+    <line x1="110" y1="440" x2="135" y2="485"/>
+  </g>
+  <text x="110" y="505" class="actor-label">API Client</text>
+
+  <!-- Group labels -->
+  <text x="330" y="105" class="group-label">Guitars</text>
+  <text x="330" y="245" class="group-label">Tone Profiles</text>
+  <text x="330" y="385" class="group-label">Equipment (read-only)</text>
+  <text x="330" y="545" class="group-label">Recommendations</text>
+
+  <!-- Guitars row -->
+  <ellipse cx="460" cy="135" rx="85" ry="34" class="uc"/>
+  <text x="460" y="135" class="uc-text">List Guitars</text>
+
+  <ellipse cx="650" cy="135" rx="85" ry="34" class="uc"/>
+  <text x="650" y="135" class="uc-text">Create Guitar</text>
+
+  <ellipse cx="840" cy="135" rx="85" ry="34" class="uc"/>
+  <text x="840" y="135" class="uc-text">View Guitar</text>
+
+  <!-- Tone Profiles row -->
+  <ellipse cx="460" cy="275" rx="90" ry="34" class="uc"/>
+  <text x="460" y="275" class="uc-text">List Tone Profiles</text>
+
+  <ellipse cx="650" cy="275" rx="95" ry="34" class="uc"/>
+  <text x="650" y="275" class="uc-text">Create Tone Profile</text>
+
+  <ellipse cx="850" cy="275" rx="90" ry="34" class="uc"/>
+  <text x="850" y="275" class="uc-text">View Tone Profile</text>
+
+  <!-- Equipment row -->
+  <ellipse cx="520" cy="415" rx="90" ry="34" class="uc"/>
+  <text x="520" y="415" class="uc-text">List Equipment</text>
+
+  <ellipse cx="740" cy="415" rx="90" ry="34" class="uc"/>
+  <text x="740" y="415" class="uc-text">View Equipment</text>
+
+  <!-- Recommendation (highlighted) -->
+  <ellipse cx="650" cy="580" rx="140" ry="48" class="uc-highlight"/>
+  <text x="650" y="573" class="uc-text-bold">Get Recommendation</text>
+  <text x="650" y="593" class="uc-text" font-size="11" font-style="italic">(the core feature)</text>
+
+  <!-- Links: actor to each use case -->
+  <g class="link">
+    <line x1="140" y1="390" x2="375" y2="140"/>
+    <line x1="140" y1="395" x2="565" y2="140"/>
+    <line x1="140" y1="400" x2="755" y2="140"/>
+
+    <line x1="140" y1="405" x2="370" y2="275"/>
+    <line x1="140" y1="408" x2="555" y2="275"/>
+    <line x1="140" y1="411" x2="760" y2="275"/>
+
+    <line x1="140" y1="414" x2="430" y2="415"/>
+    <line x1="140" y1="417" x2="650" y2="415"/>
+
+    <line x1="140" y1="420" x2="510" y2="580"/>
+  </g>
+</svg>
