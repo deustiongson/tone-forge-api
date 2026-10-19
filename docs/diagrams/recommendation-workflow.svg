@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1380" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .title { font-size: 24px; font-weight: 700; fill: #1e1e1e; text-anchor: middle; }
+    .subtitle { font-size: 15px; fill: #495057; text-anchor: middle; font-family: Menlo, Consolas, monospace; }
+    .h { font-size: 17px; font-weight: 700; fill: #1e1e1e; }
+    .t { font-size: 13px; fill: #343a40; }
+    .tc { font-size: 13px; fill: #343a40; text-anchor: middle; }
+    .hc { font-size: 15px; font-weight: 700; fill: #1e1e1e; text-anchor: middle; }
+    .code { font-family: Menlo, Consolas, monospace; font-size: 12px; fill: #343a40; }
+    .codec { font-family: Menlo, Consolas, monospace; font-size: 12px; fill: #343a40; text-anchor: middle; }
+    .step { font-size: 14px; font-weight: 700; fill: #495057; }
+    .note { font-size: 11px; fill: #e03131; text-anchor: middle; }
+    .ex { font-size: 12px; font-style: italic; fill: #495057; text-anchor: middle; }
+    .arrow { stroke: #495057; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .err { stroke: #e03131; stroke-width: 2; fill: none; marker-end: url(#arrowhead-red); }
+  </style>
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="arrowhead-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e03131"/>
+    </marker>
+    <pattern id="grille" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="6" height="6" fill="#d9c79e"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#b8a576" stroke-width="2"/>
+    </pattern>
+    <marker id="arrowhead-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0c8599"/>
+    </marker>
+  </defs>
+
+  <!-- Opaque background so dark-mode viewers don't hide the dark text -->
+  <rect width="1000" height="1380" fill="#ffffff"/>
+
+  <text x="500" y="42" class="title">ToneForge — Recommendation Workflow</text>
+  <text x="500" y="68" class="subtitle">POST /api/v1/recommendations</text>
+
+  <!-- ============ INPUTS ============ -->
+
+  <!-- Guitar card -->
+  <rect x="25" y="90" width="300" height="180" rx="10" fill="#ffe8cc" stroke="#e8590c" stroke-width="2"/>
+  <!-- Stratocaster artwork: "Fender Stratocaster.svg" by piemaster (openclipart.org), CC0 / public domain, via Wikimedia Commons -->
+  <svg x="48" y="100" width="52" height="160" viewBox="0 0 245.98103 757.6767"><g id="layer1" transform="translate(-252.62176,-122.90944)"> <g id="g5550" transform="matrix(1.4204055,0,0,1.4204055,-335.77576,-37.323536)"> <path id="path4527" d="M 492.95444,425.56253 C 487.54275,432.12795 482.291,439.25319 474.26662,436.67421 C 454.41567,425.85803 463.51847,409.28747 456.58895,397.78333 C 450.67966,387.97295 439.44966,391.44771 435.37575,399.29856 C 419.40712,430.07175 438.0763,463.27489 443.45697,495.26305 C 443.46614,495.27222 445.00517,504.60428 434.30431,525.4707 C 419.27758,554.63932 413.64783,582.47907 414.92016,592.74277 C 416.1925,603.00646 425.82168,637.15418 466.69048,642.74533 C 510.20525,648.69847 554.29059,646.12107 569.4735,631.63365 C 586.51961,615.36837 595.09154,590.74288 576.29203,540.71992 C 564.74975,517.35936 570.08922,497.99061 576.7971,478.09046 C 582.41632,461.42 591.63564,439.53736 567.95826,428.84553 C 567.29752,428.54716 558.43583,428.7831 554.8768,443.39172 C 550.91314,459.66114 540.09807,466.55587 526.79455,459.90771 L 492.95444,425.56253 z " style="fill:#e6e6e6;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" /> <path id="path4529" d="M 571.24127,438.44197 C 561.21699,447.90866 564.56731,472.1366 539.92654,471.77701 C 518.42303,466.92293 504.43621,453.57431 486.64099,448.79604 C 482.3761,447.65085 478.19103,452.35119 479.82246,457.38233 C 481.2634,472.51443 486.64655,487.34329 480.075,503.09174 C 477.68838,514.47779 470.49818,524.14509 467.70063,535.16408 C 461.86126,558.16422 470.02732,561.78351 474.26662,566.98388 C 476.60428,569.52378 481.40498,570.21641 486.38845,570.77196 C 508.2758,571.77952 532.21927,565.24793 552.04837,573.80241 C 561.84069,579.45179 571.45899,595.26165 577.80725,594.51054 C 581.87702,594.02901 583.92433,583.17805 581.84787,573.54987 C 578.09886,556.16643 571.41972,540.58072 565.68543,520.76941 C 562.62748,510.20457 560.45396,505.83935 570.23112,484.15138 C 574.00578,477.97947 577.32425,468.39696 577.80726,458.13995 C 578.73049,438.53437 573.27822,436.51832 571.24127,438.44197 z " style="fill:#9fa684;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" /> <g transform="translate(-232.08254,0)" id="g5508"> <rect style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.016945;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" id="rect5502" width="35.843472" height="9.579504" x="724.54041" y="478.09894" ry="4.789752" /> <rect style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.03357232;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" id="rect5504" width="37.089535" height="9.5628767" x="723.28601" y="511.69479" ry="4.7814384" /> <rect style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.03636551;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" id="rect5506" width="36.584846" height="9.7472668" x="794.33911" y="-440.1994" ry="4.8736334" transform="matrix(0.9896431,0.1435498,0.1444654,-0.9895099,0,0)" /> </g> <path style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:1.14643252px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 511.51344,126.51839 L 510.92953,127.10882 C 510.92953,127.10882 505.10499,128.63272 504.11497,126.50962 C 503.12495,124.38651 504.79552,119.43572 506.96945,118.61638 C 509.14338,117.79705 512.81067,123.23226 512.81067,123.23226 L 512.8476,124.33409 L 515.54285,125.3088 L 514.63777,127.81154 L 511.51344,126.51839 z " id="path4498" /> <path id="path12964" d="M 507.22029,137.63007 L 506.63638,138.2205 C 506.63638,138.2205 500.81184,139.7444 499.82182,137.6213 C 498.8318,135.49819 500.50237,130.5474 502.6763,129.72806 C 504.85023,128.90873 508.51752,134.34394 508.51752,134.34394 L 508.55445,135.44577 L 511.2497,136.42048 L 510.34462,138.92322 L 507.22029,137.63007 z " style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:1.14643252px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" /> <path id="path4500" d="M 502.42207,150.00444 L 501.83816,150.59487 C 501.83816,150.59487 496.01362,152.11877 495.0236,149.99567 C 494.03358,147.87256 495.70415,142.92177 497.87808,142.10243 C 500.05201,141.2831 503.7193,146.71831 503.7193,146.71831 L 503.75623,147.82014 L 506.45148,148.79485 L 505.5464,151.29759 L 502.42207,150.00444 z " style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:1.14643252px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" /> <path style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:1.14643252px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 498.88654,162.12627 L 498.30263,162.7167 C 498.30263,162.7167 492.47809,164.2406 491.48807,162.1175 C 490.49805,159.99439 492.16862,155.0436 494.34255,154.22426 C 496.51648,153.40493 500.18377,158.84014 500.18377,158.84014 L 500.2207,159.94197 L 502.91595,160.91668 L 502.01087,163.41942 L 498.88654,162.12627 z " id="path4502" /> <path id="path4504" d="M 494.34085,173.49049 L 493.75694,174.08092 C 493.75694,174.08092 487.9324,175.60482 486.94238,173.48172 C 485.95236,171.35861 487.62293,166.40782 489.79686,165.58848 C 491.97079,164.76915 495.63808,170.20436 495.63808,170.20436 L 495.67501,171.30619 L 498.37026,172.2809 L 497.46518,174.78364 L 494.34085,173.49049 z " style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:1.14643252px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" /> <path style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:1.14643252px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 490.55278,185.35978 L 489.96887,185.95021 C 489.96887,185.95021 484.14433,187.47411 483.15431,185.35101 C 482.16429,183.2279 483.83486,178.27711 486.00879,177.45777 C 488.18272,176.63844 491.85001,182.07365 491.85001,182.07365 L 491.88694,183.17548 L 494.58219,184.15019 L 493.67711,186.65293 L 490.55278,185.35978 z " id="path4506" /> <path id="path4496" d="M 499.01536,204.33912 C 492.28101,203.32896 489.58727,198.95165 490.93414,191.20714 C 491.24538,191.51838 505.2515,142.10293 514.67272,122.51676 C 520.2999,104.32892 536.58272,118.26693 538.66384,120.74899 C 546.32123,129.88162 536.30277,145.76041 528.81486,142.21474 C 530.83516,157.36703 538.02155,173.29999 536.13846,187.6716 C 530.38284,192.91811 524.64183,198.42008 522.24887,204.33912 L 499.01536,204.33912 z " style="fill:#9d530a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" /> <path id="path12980" d="M 497.89985,203.78521 L 492.8648,468.29363 C 502.60696,470.86764 513.51749,471.10493 525.95231,468.29363 L 522.35583,203.78521 L 497.89985,203.78521 z " style="fill:#c87137;fill-rule:evenodd;stroke:#000000;stroke-width:1.42412853px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" /> <rect ry="0.21334893" y="466.29669" x="492.31537" height="0.98055804" width="33.27776" id="rect12982" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.3215023;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21380857" y="460.70081" x="492.56866" height="0.98267066" width="32.771252" id="rect12984" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.31938976;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21334893" y="454.08981" x="492.06113" height="0.98055804" width="33.27776" id="rect12986" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.3215023;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21334893" y="447.47781" x="492.06107" height="0.98055804" width="33.27776" id="rect12988" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.3215023;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.2138086" y="440.10181" x="492.823" height="0.98267066" width="32.771252" id="rect12990" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.31938973;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21404015" y="432.47202" x="493.07675" height="0.98373485" width="32.518009" id="rect12992" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.31832549;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21357821" y="424.84384" x="492.82352" height="0.98161173" width="33.024506" id="rect12994" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.32044867;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21427284" y="416.45007" x="493.33044" height="0.98480445" width="32.264771" id="rect12996" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.31725591;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21427284" y="407.04062" x="493.58481" height="0.98480445" width="32.264771" id="rect12998" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.31725591;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21474187" y="397.6301" x="493.58374" height="0.98696005" width="31.75831" id="rect13000" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.31510034;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21617843" y="387.20016" x="494.34335" height="0.99356252" width="30.239058" id="rect13002" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30849788;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21593583" y="377.28271" x="494.08954" height="0.9924475" width="30.492254" id="rect13004" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30961284;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21545449" y="365.58557" x="494.09076" height="0.99023533" width="30.998657" id="rect13006" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.3118251;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21919641" y="246.56053" x="496.37088" height="1.0074332" width="27.201225" id="rect13008" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.29462716;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.22024973" y="227.23067" x="497.0043" height="1.0122743" width="26.188831" id="rect13010" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.28978613;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.11066449" y="456.10596" x="499.16345" height="3.3060124" width="20.090385" id="rect13012" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.11066449" y="442.37329" x="499.92636" height="3.3060124" width="19.073149" id="rect13014" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.14471512" y="427.11481" x="499.16336" height="4.3232474" width="19.327457" id="rect13016" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.18727838" y="409.82181" x="498.90912" height="5.5947909" width="19.073149" id="rect13018" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.221329" y="379.30475" x="498.65475" height="6.6120248" width="18.818842" id="rect13020" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.42563272" y="283.93903" x="502.72366" height="12.715434" width="13.478359" id="rect13022" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.221329" y="204.34039" x="497.00177" height="3.5603213" width="26.448099" id="rect13024" style="fill:#d38d5f;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.71206427;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.47670862" y="210.1895" x="503.61374" height="14.241285" width="13.478359" id="rect13028" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.47670862" y="248.33578" x="503.23236" height="14.241285" width="13.478359" id="rect13030" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.35753149" y="314.96469" x="502.46942" height="10.680964" width="13.478359" id="rect13032" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.28943023" y="342.6843" x="502.46942" height="8.6464949" width="13.478359" id="rect13034" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21766201" y="281.40436" x="495.61154" height="1.0003811" width="28.720024" id="rect13036" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30167934;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21893695" y="264.36273" x="496.37152" height="1.0062408" width="27.45434" id="rect13038" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.29581958;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21816762" y="297.67892" x="495.86465" height="1.0027049" width="28.21373" id="rect13040" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.29935554;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21766201" y="312.93863" x="495.35721" height="1.0003811" width="28.720024" id="rect13042" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30167934;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21816762" y="326.92444" x="495.10175" height="1.0027049" width="28.21373" id="rect13044" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.29935554;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21642233" y="340.6611" x="494.85141" height="0.99468344" width="29.98587" id="rect13046" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30737689;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect ry="0.21617843" y="353.37711" x="494.59769" height="0.99356252" width="30.239058" id="rect13048" style="fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.30849788;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path transform="matrix(1.4241285,0,0,1.4241285,-104.36385,53.973538)" d="M 437.67858 60.219322 A 2.3214285 2.3214285 0 1 1 433.03572,60.219322 A 2.3214285 2.3214285 0 1 1 437.67858 60.219322 z" id="path13060" style="fill:#b3b3b3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path transform="matrix(1.4241285,0,0,1.4241285,-108.15723,66.007715)" d="M 437.67858 60.219322 A 2.3214285 2.3214285 0 1 1 433.03572,60.219322 A 2.3214285 2.3214285 0 1 1 437.67858 60.219322 z" id="path13062" style="fill:#b3b3b3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path transform="matrix(1.4241285,0,0,1.4241285,-112.19784,78.2267)" d="M 437.67858 60.219322 A 2.3214285 2.3214285 0 1 1 433.03572,60.219322 A 2.3214285 2.3214285 0 1 1 437.67858 60.219322 z" id="path13064" style="fill:#b3b3b3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path transform="matrix(1.4241285,0,0,1.4241285,-116.74369,90.475363)" d="M 437.67858 60.219322 A 2.3214285 2.3214285 0 1 1 433.03572,60.219322 A 2.3214285 2.3214285 0 1 1 437.67858 60.219322 z" id="path13066" style="fill:#b3b3b3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path transform="matrix(1.4241285,0,0,1.4241285,-100.51624,42.614641)" d="M 437.67858 60.219322 A 2.3214285 2.3214285 0 1 1 433.03572,60.219322 A 2.3214285 2.3214285 0 1 1 437.67858 60.219322 z" id="path13068" style="fill:#b3b3b3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path transform="matrix(1.4241285,0,0,1.4241285,-120.07052,101.46553)" d="M 437.67858 60.219322 A 2.3214285 2.3214285 0 1 1 433.03572,60.219322 A 2.3214285 2.3214285 0 1 1 437.67858 60.219322 z" id="path13076" style="fill:#b3b3b3;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <g transform="translate(-234.35539,0)" id="g5523"> <path style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" id="path5515" d="M 776.80733 553.22058 A 5.9346461 5.9346461 0 1 1 764.93803,553.22058 A 5.9346461 5.9346461 0 1 1 776.80733 553.22058 z" transform="matrix(1.0784932,0,0,1.0784932,-61.518453,-44.686771)" /> <path transform="matrix(1.0784932,0,0,1.0784932,-39.800173,-33.575093)" d="M 776.80733 553.22058 A 5.9346461 5.9346461 0 1 1 764.93803,553.22058 A 5.9346461 5.9346461 0 1 1 776.80733 553.22058 z" id="path5517" style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" /> <path style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" id="path5521" d="M 776.80733 553.22058 A 5.9346461 5.9346461 0 1 1 764.93803,553.22058 A 5.9346461 5.9346461 0 1 1 776.80733 553.22058 z" transform="matrix(1.0784932,0,0,1.0784932,-23.385194,-18.927881)" /> </g> <rect ry="4.7814384" y="563.95343" x="488.15622" height="22.223356" width="42.17387" id="rect5528" style="opacity:1;fill:#2e3436;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" /> <path id="path13052" d="M 519.66264,131.42473 L 519.89078,204.54067 L 524.21159,576.58287" style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#555555;stroke-width:0.7145111;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path id="path13050" d="M 503.8301,179.01428 L 503.35855,204.60656 L 500.05377,577.46901" style="fill:none;fill-rule:evenodd;stroke:#555555;stroke-width:0.71394724;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path id="path13056" d="M 512.08997,154.64853 L 511.75265,204.20589 L 511.49839,576.89114" style="fill:none;fill-rule:evenodd;stroke:#555555;stroke-width:0.71408552;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path id="path13058" d="M 508.13407,167.28971 L 507.42729,205.52522 L 505.9019,576.99636" style="fill:none;fill-rule:evenodd;stroke:#555555;stroke-width:0.71432948;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path id="path13074" d="M 499.47075,189.00652 L 499.74692,204.46562 L 494.91662,577.73757" style="fill:none;fill-rule:evenodd;stroke:#555555;stroke-width:0.71363741;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <path id="path13054" d="M 515.8728,142.40863 L 516.07585,184.88963 L 517.60132,577.13363" style="fill:none;fill-rule:evenodd;stroke:#555555;stroke-width:0.71391982;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /> <rect transform="matrix(0.99909,-4.2652677e-2,3.7689739e-2,0.9992895,0,0)" ry="5.1540604" y="590.76477" x="469.40683" height="12.24984" width="35.060673" id="rect5530" style="opacity:1;fill:#2e3436;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.04515767;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" /> <g id="g5546"> <path style="fill:#2e3436;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 532.35039,514.70849 C 531.79819,538.84969 530.53802,557.44057 526.79455,577.84302 C 525.28786,579.4803 524.55271,586.01866 527.04709,584.40902 C 532.58048,573.1298 534.21686,537.8505 535.63338,514.70849 L 532.35039,514.70849 z " id="path5532" /> <rect style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" id="rect5538" width="3.7880721" height="21.213203" x="545.84436" y="479.71756" ry="1.8940361" transform="matrix(0.9996392,2.6859927e-2,-2.6859927e-2,0.9996392,0,0)" /> </g> </g> </g> </svg>
+  <text x="118" y="128" class="h">Guitar</text>
+  <text x="118" y="156" class="code">pickupType: "single-coil"</text>
+  <text x="118" y="176" class="code">tuning: "E-standard"</text>
+  <text x="118" y="210" class="t">→ feeds the pickup</text>
+  <text x="118" y="228" class="t">   compatibility score</text>
+
+  <!-- Tone Profile card -->
+  <rect x="350" y="90" width="300" height="180" rx="10" fill="#e5dbff" stroke="#7048e8" stroke-width="2"/>
+  <rect x="368" y="115" width="100" height="110" rx="8" fill="#343a40"/>
+  <!-- gain knob at 7/10 -->
+  <circle cx="395" cy="147" r="14" fill="#f1f3f5" stroke="#868e96" stroke-width="2"/>
+  <line x1="395" y1="147" x2="403.1" y2="141.1" stroke="#1e1e1e" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="395" y="175" font-size="9" fill="#f8f9fa" text-anchor="middle">GAIN</text>
+  <!-- brightness knob at 6/10 -->
+  <circle cx="441" cy="147" r="14" fill="#f1f3f5" stroke="#868e96" stroke-width="2"/>
+  <line x1="441" y1="147" x2="445.5" y2="138.1" stroke="#1e1e1e" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="441" y="175" font-size="9" fill="#f8f9fa" text-anchor="middle">BRIGHT</text>
+  <!-- genre tag -->
+  <rect x="378" y="189" width="80" height="22" rx="11" fill="#7048e8"/>
+  <text x="418" y="204" font-size="11" fill="#ffffff" text-anchor="middle">blues</text>
+  <text x="485" y="128" class="h">Tone Profile</text>
+  <text x="485" y="156" class="code">genre: "blues"</text>
+  <text x="485" y="176" class="code">gain: 7  brightness: 6</text>
+  <text x="485" y="210" class="t">→ feeds genre, gain</text>
+  <text x="485" y="228" class="t">   and brightness scores</text>
+
+  <!-- Equipment card (dashed: comes from the seeded DB catalog, not from the client) -->
+  <rect x="675" y="90" width="300" height="180" rx="10" fill="#e6fcf5" stroke="#0c8599" stroke-width="2" stroke-dasharray="7 4"/>
+  <text x="695" y="118" class="h">Equipment</text>
+  <text x="695" y="137" font-size="11" fill="#0c8599">seeded catalog · read-only · scored item</text>
+  <text x="695" y="160" class="code">type</text>
+  <text x="855" y="160" font-size="11" fill="#495057">→ which slot</text>
+  <text x="695" y="179" class="code">genre</text>
+  <text x="855" y="179" font-size="11" fill="#495057">→ genre match</text>
+  <text x="695" y="198" class="code">gainRating</text>
+  <text x="855" y="198" font-size="11" fill="#495057">→ gain score</text>
+  <text x="695" y="217" class="code">brightnessRating</text>
+  <text x="855" y="217" font-size="11" fill="#495057">→ brightness score</text>
+  <text x="695" y="236" class="code">preferredPickupType?</text>
+  <text x="855" y="236" font-size="11" fill="#495057">→ pickup bonus</text>
+  <text x="695" y="258" font-size="11" fill="#495057" font-family="Menlo, Consolas, monospace">type: amplifier | cabinet | effect</text>
+
+  <!-- inputs → request -->
+  <line x1="175" y1="270" x2="420" y2="318" class="arrow"/>
+  <line x1="500" y1="270" x2="500" y2="318" class="arrow"/>
+  <text x="230" y="306" class="code">guitarId</text>
+  <text x="510" y="300" class="code">toneProfileId</text>
+
+  <g transform="translate(0,30)">
+  <!-- ============ HTTP LAYER ============ -->
+
+  <rect x="300" y="290" width="400" height="60" rx="8" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text x="500" y="314" class="hc">HTTP Request (JSON)</text>
+  <text x="500" y="337" class="codec">{ "guitarId": 1, "toneProfileId": 2 }</text>
+
+  <line x1="500" y1="350" x2="500" y2="388" class="arrow"/>
+
+  <rect x="300" y="390" width="400" height="60" rx="8" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"/>
+  <text x="500" y="414" class="hc">RecommendationController</text>
+  <text x="500" y="436" class="codec">#[MapRequestPayload] CreateRecommendationRequest</text>
+
+  <line x1="300" y1="420" x2="232" y2="420" class="err"/>
+  <rect x="40" y="398" width="190" height="44" rx="6" fill="#ffe3e3" stroke="#e03131" stroke-width="1.5"/>
+  <text x="135" y="416" font-size="13" font-weight="700" fill="#c92a2a" text-anchor="middle">422 / 400</text>
+  <text x="135" y="433" font-size="11" fill="#c92a2a" text-anchor="middle">invalid IDs / malformed JSON</text>
+
+  <line x1="500" y1="450" x2="500" y2="488" class="arrow"/>
+
+  <!-- ============ SERVICE ============ -->
+
+  <rect x="60" y="490" width="880" height="460" rx="12" fill="#f4fbf5" stroke="#2f9e44" stroke-width="2.5" stroke-dasharray="8 5"/>
+  <text x="82" y="520" font-size="16" font-weight="700" fill="#2b8a3e">RecommendationService::recommend(guitarId, toneProfileId)</text>
+
+  <!-- Step 1 -->
+  <text x="82" y="550" class="step">① Load data through the repositories</text>
+  <rect x="80" y="562" width="260" height="46" rx="8" fill="#e7f5ff" stroke="#1971c2" stroke-width="1.5"/>
+  <text x="210" y="581" class="tc" font-weight="700">GuitarRepository</text>
+  <text x="210" y="599" class="codec">find(guitarId)</text>
+  <rect x="370" y="562" width="260" height="46" rx="8" fill="#e7f5ff" stroke="#1971c2" stroke-width="1.5"/>
+  <text x="500" y="581" class="tc" font-weight="700">ToneProfileRepository</text>
+  <text x="500" y="599" class="codec">find(toneProfileId)</text>
+  <rect x="660" y="562" width="260" height="46" rx="8" fill="#e7f5ff" stroke="#1971c2" stroke-width="1.5"/>
+  <text x="790" y="581" class="tc" font-weight="700">EquipmentRepository</text>
+  <text x="790" y="599" class="codec">findAll()  — whole catalog</text>
+  <text x="210" y="625" class="note">null → GuitarNotFoundException → 404</text>
+  <text x="500" y="625" class="note">null → ToneProfileNotFoundException → 404</text>
+  <text x="790" y="625" class="note" fill="#868e96">(404 mapping done by ApiExceptionListener)</text>
+
+  <!-- Step 2 -->
+  <text x="82" y="660" class="step">② score() every piece of equipment against the guitar + tone profile</text>
+  <rect x="80" y="672" width="840" height="116" rx="8" fill="#ffffff" stroke="#adb5bd" stroke-width="1.5"/>
+  <circle cx="98" cy="694" r="5" fill="#7048e8"/>
+  <text x="112" y="698" class="t">genre match — equipment.genre = toneProfile.genre</text>
+  <text x="900" y="698" class="t" text-anchor="end" font-weight="700">+5</text>
+  <circle cx="98" cy="719" r="5" fill="#7048e8"/>
+  <text x="112" y="723" class="t">gain similarity — (10 − |equipment.gainRating − toneProfile.gain|) × 2</text>
+  <text x="900" y="723" class="t" text-anchor="end" font-weight="700">0–20</text>
+  <circle cx="98" cy="744" r="5" fill="#7048e8"/>
+  <text x="112" y="748" class="t">brightness similarity — (10 − |equipment.brightnessRating − toneProfile.brightness|) × 2</text>
+  <text x="900" y="748" class="t" text-anchor="end" font-weight="700">0–20</text>
+  <circle cx="98" cy="769" r="5" fill="#e8590c"/>
+  <text x="112" y="773" class="t">pickup compatibility — equipment.preferredPickupType = guitar.pickupType</text>
+  <text x="900" y="773" class="t" text-anchor="end" font-weight="700">+1</text>
+
+  <!-- Step 3 -->
+  <text x="82" y="822" class="step">③ Pick the winners for each equipment type</text>
+  <rect x="80" y="834" width="260" height="96" rx="8" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+  <text x="210" y="862" class="codec">type = amplifier</text>
+  <text x="210" y="888" class="tc" font-weight="700">keep the single</text>
+  <text x="210" y="906" class="tc" font-weight="700">highest score</text>
+  <rect x="370" y="834" width="260" height="96" rx="8" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+  <text x="500" y="862" class="codec">type = cabinet</text>
+  <text x="500" y="888" class="tc" font-weight="700">keep the single</text>
+  <text x="500" y="906" class="tc" font-weight="700">highest score</text>
+  <rect x="660" y="834" width="260" height="96" rx="8" fill="#fff3bf" stroke="#f08c00" stroke-width="1.5"/>
+  <text x="790" y="862" class="codec">type = effect → pickTopEffects()</text>
+  <text x="790" y="888" class="tc" font-weight="700">sort by score, keep top 2</text>
+  <text x="790" y="906" class="tc">(ties with #2 are kept too)</text>
+
+  <!-- service → outputs -->
+  <line x1="210" y1="930" x2="210" y2="993" class="arrow"/>
+  <line x1="500" y1="930" x2="500" y2="993" class="arrow"/>
+  <line x1="790" y1="930" x2="790" y2="993" class="arrow"/>
+
+  <!-- ============ OUTPUTS ============ -->
+
+  <!-- Amplifier -->
+  <rect x="80" y="995" width="260" height="175" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="2"/>
+  <rect x="150" y="1012" width="120" height="90" rx="6" fill="#343a40"/>
+  <rect x="156" y="1018" width="108" height="18" rx="2" fill="#ced4da"/>
+  <circle cx="168" cy="1027" r="4.5" fill="#212529"/>
+  <circle cx="182" cy="1027" r="4.5" fill="#212529"/>
+  <circle cx="196" cy="1027" r="4.5" fill="#212529"/>
+  <circle cx="210" cy="1027" r="4.5" fill="#212529"/>
+  <circle cx="224" cy="1027" r="4.5" fill="#212529"/>
+  <circle cx="252" cy="1027" r="4" fill="#fa5252"/>
+  <rect x="156" y="1042" width="108" height="54" rx="2" fill="url(#grille)"/>
+  <rect x="190" y="1048" width="40" height="11" rx="2" fill="#f8f9fa"/>
+  <text x="210" y="1057" font-size="8" font-weight="700" fill="#343a40" text-anchor="middle">TONE</text>
+  <text x="210" y="1132" class="hc">Amplifier</text>
+  <text x="210" y="1154" class="ex">e.g. Fender Super Reverb</text>
+
+  <!-- Cabinet -->
+  <rect x="370" y="995" width="260" height="175" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="2"/>
+  <rect x="452" y="1010" width="96" height="96" rx="6" fill="#343a40"/>
+  <rect x="458" y="1016" width="84" height="84" rx="3" fill="#495057"/>
+  <circle cx="479" cy="1037" r="17" fill="#212529" stroke="#adb5bd" stroke-width="1.5"/>
+  <circle cx="521" cy="1037" r="17" fill="#212529" stroke="#adb5bd" stroke-width="1.5"/>
+  <circle cx="479" cy="1079" r="17" fill="#212529" stroke="#adb5bd" stroke-width="1.5"/>
+  <circle cx="521" cy="1079" r="17" fill="#212529" stroke="#adb5bd" stroke-width="1.5"/>
+  <circle cx="479" cy="1037" r="5" fill="#868e96"/>
+  <circle cx="521" cy="1037" r="5" fill="#868e96"/>
+  <circle cx="479" cy="1079" r="5" fill="#868e96"/>
+  <circle cx="521" cy="1079" r="5" fill="#868e96"/>
+  <text x="500" y="1132" class="hc">Cabinet</text>
+  <text x="500" y="1154" class="ex">e.g. Fender Blues Junior 1x12</text>
+
+  <!-- Effects -->
+  <rect x="660" y="995" width="260" height="175" rx="10" fill="#d3f9d8" stroke="#2f9e44" stroke-width="2"/>
+  <path d="M776,1060 C786,1076 794,1076 804,1060" stroke="#212529" stroke-width="3" fill="none"/>
+  <rect x="728" y="1018" width="50" height="84" rx="6" fill="#37b24d" stroke="#2b8a3e" stroke-width="1.5"/>
+  <circle cx="740" cy="1033" r="5" fill="#212529"/>
+  <circle cx="753" cy="1033" r="5" fill="#212529"/>
+  <circle cx="766" cy="1033" r="5" fill="#212529"/>
+  <circle cx="753" cy="1054" r="2.5" fill="#fa5252"/>
+  <circle cx="753" cy="1084" r="8" fill="#ced4da" stroke="#495057" stroke-width="1.5"/>
+  <rect x="802" y="1018" width="50" height="84" rx="6" fill="#1c7ed6" stroke="#1864ab" stroke-width="1.5"/>
+  <circle cx="814" cy="1033" r="5" fill="#212529"/>
+  <circle cx="827" cy="1033" r="5" fill="#212529"/>
+  <circle cx="840" cy="1033" r="5" fill="#212529"/>
+  <circle cx="827" cy="1054" r="2.5" fill="#fa5252"/>
+  <circle cx="827" cy="1084" r="8" fill="#ced4da" stroke="#495057" stroke-width="1.5"/>
+  <text x="790" y="1132" class="hc">Effects</text>
+  <text x="790" y="1154" class="ex">e.g. Fulltone OCD, King of Tone</text>
+
+  <!-- outputs → response -->
+  <line x1="210" y1="1170" x2="400" y2="1218" class="arrow"/>
+  <line x1="500" y1="1170" x2="500" y2="1218" class="arrow"/>
+  <line x1="790" y1="1170" x2="600" y2="1218" class="arrow"/>
+
+  <!-- ============ RESPONSE ============ -->
+
+  <rect x="250" y="1220" width="500" height="105" rx="8" fill="#e9ecef" stroke="#495057" stroke-width="2"/>
+  <text x="500" y="1245" class="hc">RecommendationResult → 200 OK</text>
+  <text x="500" y="1268" class="codec">{ "guitar": {…}, "toneProfile": {…},</text>
+  <text x="500" y="1286" class="codec">  "amplifier": {…}, "cabinet": {…},</text>
+  <text x="500" y="1304" class="codec">  "effects": [ {…}, {…} ] }</text>
+  </g>
+
+  <!-- Equipment catalog → EquipmentRepository::findAll() -->
+  <line x1="825" y1="270" x2="825" y2="590" stroke="#0c8599" stroke-width="2" stroke-dasharray="7 4" fill="none" marker-end="url(#arrowhead-teal)"/>
+  <text x="835" y="350" font-size="11" fill="#0c8599">loaded from MySQL</text>
+  <text x="835" y="365" font-size="11" fill="#0c8599">(not sent by the client)</text>
+</svg>

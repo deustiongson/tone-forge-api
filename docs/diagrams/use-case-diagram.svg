@@ -10,6 +10,9 @@
     .actor-label { font-size: 15px; fill: #1e1e1e; text-anchor: middle; font-weight: 600; }
   </style>
 
+  <!-- Opaque background so dark-mode viewers don't hide the dark text -->
+  <rect width="1040" height="760" fill="#ffffff"/>
+
   <!-- Title -->
   <text x="610" y="28" class="title">ToneForge API — Use Cases</text>
 

@@ -66,6 +66,10 @@ There are deliberately **no foreign-key relationships** between these tables —
 
 ![ToneForge API use case diagram — an API Client actor connected to nine use cases grouped under Guitars, Tone Profiles, Equipment, and the central Get Recommendation feature](docs/diagrams/use-case-diagram.svg)
 
+## Recommendation Workflow
+
+![ToneForge recommendation workflow — a Guitar and a Tone Profile are sent by ID to RecommendationController, RecommendationService loads them plus the seeded Equipment catalog (type, genre, gain/brightness ratings, preferred pickup) through repositories, scores every item, and picks the best amplifier, cabinet, and top effects](docs/diagrams/recommendation-workflow.svg)
+
 ## API Endpoints
 
 All endpoints return/accept JSON.
@@ -130,9 +134,10 @@ Content-Type: application/json
   "guitar": { "id": 1, "name": "My Strat", "pickupType": "single-coil", "tuning": "E-standard" },
   "toneProfile": { "id": 2, "name": "Blues Lead", "genre": "blues", "gain": 7, "brightness": 6 },
   "amplifier": { "id": 7, "name": "Fender Super Reverb", "type": "amplifier", "genre": "blues", "gainRating": 6, "brightnessRating": 7, "preferredPickupType": null },
-  "cabinet": { "id": 8, "name": "Fender Openback 4x12", "type": "cabinet", "genre": "blues", "gainRating": 6, "brightnessRating": 8, "preferredPickupType": null },
+  "cabinet": { "id": 22, "name": "Fender Blues Junior 1x12", "type": "cabinet", "genre": "blues", "gainRating": 5, "brightnessRating": 6, "preferredPickupType": null },
   "effects": [
-    { "id": 9, "name": "Boss BD-2 Blues Driver", "type": "effect", "genre": "blues", "gainRating": 6, "brightnessRating": 8, "preferredPickupType": null }
+    { "id": 23, "name": "Fulltone OCD", "type": "effect", "genre": "blues", "gainRating": 6, "brightnessRating": 7, "preferredPickupType": null },
+    { "id": 24, "name": "Analog Man King of Tone", "type": "effect", "genre": "blues", "gainRating": 6, "brightnessRating": 7, "preferredPickupType": null }
   ]
 }
 ```
