@@ -16,7 +16,7 @@ The API takes two inputs — **what guitar you have** (`Guitar`) and **what kind
 
 ToneForge is a backend engineering portfolio project — the primary goal is **learning and demonstrating backend architecture**, not building a feature-complete product. It's deliberately scoped small, and the guitar domain exists mainly because it's a personally interesting space that makes backend concepts easier to reason about and discuss in an interview setting.
 
-Concepts this project is specifically built to demonstrate: Symfony conventions, Doctrine ORM, REST API design, dependency injection, the Repository pattern, validation and error handling, automated testing (unit + planned integration), and deliberate architectural tradeoffs — not pattern-collecting for its own sake.
+Concepts this project is specifically built to demonstrate: Symfony conventions, Doctrine ORM, REST API design, dependency injection, the Repository pattern, validation and error handling, automated testing (unit + integration), and deliberate architectural tradeoffs — not pattern-collecting for its own sake.
 
 ## AI-Assisted Development
 
@@ -243,9 +243,9 @@ Not yet implemented. Planned to use GitHub Actions, gated on pull requests rathe
 
 - Strategy pattern for recommendation scoring — only if a second, genuinely different algorithm (e.g. per-genre weighting) is introduced
 - Narrow repository interfaces (`EquipmentRepositoryInterface`, etc.) for `RecommendationService`, refactored from the current direct-concrete-class approach
-- API/integration tests for all controllers
 - Caching for recommendation calculations (repeated work on identical guitar/tone-profile pairs)
 - Rate limiting
+- Stop loading whole tables into memory: the list endpoints (`GET /guitars`, `/tone-profiles`, `/equipment`) and `RecommendationService` all call `findAll()` today. List endpoints → pagination (`?page=&limit=`, or cursor-based for large/changing data). Recommendations can't simply paginate since every item must be scored → narrow candidates in SQL first (e.g. by `type`/`genre`) or stream rows in batches via Doctrine's `toIterable()`
 - `Genre` promoted from enum to a full entity, if/when genres need to be admin-manageable without a code deploy
 - Optional `Recommendation` persistence, if a history/`GET /recommendations/{id}` feature is ever requested
 - GitHub Actions CI/CD, PR-gated
